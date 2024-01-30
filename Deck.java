@@ -1,17 +1,68 @@
 /**
- * Write a description of class Deck here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * 
+ * @Mark P
+ * @
  */
 
-import greenfoot.*;
-
+import greenfoot.*; 
+import java.util.ArrayList;
 public class Deck 
 {
-    /****************************************************
-    ***   Leave as comment until ready to implement   ***
-    *****************************************************
+    private Card[] unShuffledDeck;
+    private ArrayList<Card> shuffledDeck = new ArrayList<Card>(); 
+    
+    Deck(int numOfCardsInDeck)
+    {
+        numOfCardsInDeck = limitNumCardsInDeck(numOfCardsInDeck);  // limits size to 27 or 81        
+        unShuffledDeck = new Card[numOfCardsInDeck + 1];           // playing cards plus blank card
+        shuffledDeck = new ArrayList<>();                          // Instantiates ArrayList with no elements
+        populateUnshuffledDeckWithCards(numOfCardsInDeck);         // Initializes Unshuffled Deck
+        createShuffledDeck();                                      // Initializes shuffled deck excluding blank card
+    }
+    
+    public int getNumCardsInDeck()
+    {
+        return shuffledDeck.size();
+    }
+    
+    public Card getTopCard()
+    {
+        return shuffledDeck.remove(0); 
+    }
+    
+    public Card getShuffledCard(int index)
+    {
+        return shuffledDeck.get(index);
+    }
+    
+    public ArrayList<Card> getShuffledDeck()
+    {
+        return shuffledDeck;
+    }
+    
+    public int limitNumCardsInDeck(int number)
+    {
+        if (number <= 27)
+        {
+            return 27;
+        }
+        else 
+        {
+            return 81;
+        }
+    }
+    
+    
+    public void createShuffledDeck()
+    {
+        for (int i = 1; i < unShuffledDeck.length; i++)
+        {
+            shuffledDeck.add((int) (Math.random() * shuffledDeck.size()), unShuffledDeck[i]);
+        }
+    }
+    
+
     // adds all the cards to the unshuffled deck.   
     private void populateUnshuffledDeckWithCards(int numOfCardsInDeck)        
     {
@@ -269,5 +320,4 @@ public class Deck
           }
     }
     
-    **************  END OF COMMENT BLOCK  ***************/
 }
