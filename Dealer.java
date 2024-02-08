@@ -54,22 +54,49 @@ public class Dealer extends Actor
     
     public void endGame()
     {
-        
+        Greenfoot.stop();
     }
     
     public void checkIfTriple()
     {
-        
+        boolean shape = (cardsSelected[0].getShape().ordinal() + cardsSelected[0].getShape().ordinal() + cardsSelected[0].getShape().ordinal()) % 3 == 0;
+        boolean color = (cardsSelected[0].getColor().ordinal() + cardsSelected[0].getColor().ordinal() + cardsSelected[0].getColor().ordinal()) % 3 == 0;
+        boolean shading = (cardsSelected[0].getShading() + cardsSelected[1].getShading() + cardsSelected[2].getShading()) % 3 == 0;    
+        boolean numberOfShape = (cardsSelected[0].getNumberOfShapes() + cardsSelected[1].getNumberOfShapes() + cardsSelected[2].getNumberOfShapes()) % 3 == 0;
+        if (shape && color && shading && numberOfShape)
+        {
+            actionIfTriple();
+        }
     }
     
     public void actionIfTriple()
     {
-        
+        for (int i = 0; i < 3; i++)
+        {
+            int x = cardsSelected[i].getX();
+            int y = cardsSelected[i].getY();
+            Card card = deck.getTopCard();
+            if (card.getColor() != Card.Color.NO_COLOR)
+            {
+                getWorld().addObject(card, x, y);
+                cardsOnBoard.set(selectedCardsIndex.get(i), card);
+            }
+        }
+        Animations.slideAndTurn(cardsSelected);
+        Scorekeeper.updateScore();
+        triplesRemaining--;
+        if (triplesRemaining == 0)
+        {
+            endGame();
+        }
+        setUI();
     }
     
-    public void setCardsSelected(ArrayList<Card> cards, ArrayList<Integer> Ints, Card[] allCards)
+    public void setCardsSelected(ArrayList<Card> cards, ArrayList<Integer> ints, Card[] allCards)
     {
-        
+        cardsOnBoard = cards;
+        selectedCardsIndex = ints;
+        cardsSelected = allCards;
     }
     
 

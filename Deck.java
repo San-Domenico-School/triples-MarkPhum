@@ -28,7 +28,14 @@ public class Deck
     
     public Card getTopCard()
     {
-        return shuffledDeck.remove(0); 
+        if (shuffledDeck.size() > 0)
+        {
+            return shuffledDeck.remove(0); 
+        }
+        else 
+        {
+            return unShuffledDeck[0];
+        }
     }
     
     public Card getShuffledCard(int index)

@@ -76,6 +76,7 @@ public class Player extends Actor
             cardsSelected[0] = cardsOnBoard.get(selectedCardsIndex.get(0));
             cardsSelected[1] = cardsOnBoard.get(selectedCardsIndex.get(1));
             cardsSelected[2] = cardsOnBoard.get(selectedCardsIndex.get(2));
+            dealer.setCardsSelected(cardsOnBoard, selectedCardsIndex, cardsSelected);
             return true;
         }
         else
